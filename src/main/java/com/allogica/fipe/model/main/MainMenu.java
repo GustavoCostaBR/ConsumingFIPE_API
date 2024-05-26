@@ -84,32 +84,16 @@ public class MainMenu {
             CustomPrinter.printListOfBranchs(listBranch);
             String branchCode;
             List<VehicleModel> vehicleModelList;
-            String carCode;
+            String vehicleCode;
             branchCode = receiveAndCheck("branch: ", requestValidationAndDataReturn.getBranchs());
             CustomPrinter.printListOfVehicleModels(requestValidationAndDataReturn.branchRequestValidationAndRequest(option ,branchCode));
             vehicleModelList = receiveVehicleNameAndCheck();
             CustomPrinter.printListOfVehicleModels(vehicleModelList);
-            carCode = receiveAndCheck("car: ", requestValidationAndDataReturn.getVehicleModelsReduced());
-
-            //            CustomPrinter.printListOfCarModels(requestValidationAndDataReturn.requestCarModelList(branchCode))
+            vehicleCode = receiveAndCheck("car: ", requestValidationAndDataReturn.getVehicleModelsReduced());
+            CustomPrinter.printListOfVehicle(requestValidationAndDataReturn.vehicleRequestValidationAndRequest(
+                    option, branchCode, vehicleCode));
         } else {
             System.out.println("App closed!");
         }
-
-//        String branchCode;
-//        String carModelCode;
-//        String carCode;
-//        branchCode = receiveAndCheck("branch: ", requestValidationAndDataReturn.getBranchs());
-//        CustomPrinter.printListOfCarModels(requestValidationAndDataReturn.requestCarModelList(branchCode));
-//        carModelCode = receiveAndCheck("car model: ", requestValidationAndDataReturn.getCarModels());
-//
-//
-//        CustomPrinter.printListOfCarModels(requestValidationAndDataReturn.requestCarModelList(branchCode));
-//        do {
-//            System.out.println("Choose the number of one model");
-//            branchCode = teclado.nextLine();
-//        } while (!codeIsIntegerLessOrEqualBranchSize(branchCode));
-
-
     }
 }

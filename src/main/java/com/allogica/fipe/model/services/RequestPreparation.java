@@ -1,5 +1,11 @@
 package com.allogica.fipe.model.services;
 
+import com.allogica.fipe.model.entities.Vehicle;
+import com.allogica.fipe.model.entities.VehicleYear;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class RequestPreparation {
     static final String BRANCH_LIST = "https://parallelum.com.br/fipe/api/v1/___/marcas";
     static final String BRANCH_SELECTION = "https://parallelum.com.br/fipe/api/v1/___/marcas/  /modelos";
@@ -17,12 +23,18 @@ public class RequestPreparation {
         return Request.callApi(BRANCH_SELECTION.replace("___", vehicleType).replace("  ", branch));
     }
 
-    public String carModelRequestPreparationAndRequest(String branch, String carModel){
-        return Request.callApi(VEHICLE_MODEL_SELECTION.replace("  ", branch).replace("__", carModel));
+    public String vehicleYearRequestPreparationAndRequest(String vehicleType, String branchCode, String vehicleCode){
+        return Request.callApi(VEHICLE_MODEL_SELECTION.replace("___", vehicleType).replace("  ", branchCode).replace("__", vehicleCode));
     }
 
-    public String carRequestPreparationAndRequest(String branch, String carModel, String car){
-        return Request.callApi(VEHICLE_SELECTION.replace("  ", branch).replace("__", carModel).replace("**", car));
+    public List<String> vehicleRequestPreparationAndRequest(String vehicleType, String branchCode, String vehicleCode, List<VehicleYear> vehicleYears){
+        List<String> vehiclesString = new ArrayList<>();
+        for(VehicleYear vehicleYear : vehicleYears){
+            vehiclesString.add(Request.callApi(VEHICLE_SELECTION.replace("___", vehicleType).replace("  ", branchCode).replace("__", vehicleCode).replace("**", vehicleYear.codeYear())));
+        }
+        return vehiclesString;
     }
+
+
 
 }
